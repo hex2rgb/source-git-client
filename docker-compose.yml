@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     image: source-git-client:local
     container_name: source-git-client
+    tty: true
+    stdin_open: true
     volumes:
       - /mnt/alonepool/alone/workspace-pro:/workspace
-      - /mnt/user/appdata/source-git-home/ssh:/home/git/.ssh
+      - /mnt/user/appdata/source-git-client/ssh:/home/git/.ssh

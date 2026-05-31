@@ -34,6 +34,7 @@ RUN set -eux; \
   && sed -i 's/^# *\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen \
   && sed -i 's/^# *\(zh_CN.UTF-8 UTF-8\)/\1/' /etc/locale.gen \
   && locale-gen \
+  && ln -sf /usr/bin/bash /usr/bin/sh \
   && mkdir -p /workspace /home/git/.ssh \
   && printf '%s\n' \
     'if [ -f /etc/profile.d/bash_completion.sh ]; then' \
@@ -51,4 +52,4 @@ ENV LC_ALL=zh_CN.UTF-8
 ENV EDITOR=vim
 WORKDIR /workspace
 
-CMD ["sleep", "infinity"]
+CMD ["/bin/bash"]
