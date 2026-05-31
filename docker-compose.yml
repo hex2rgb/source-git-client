@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: source-git-client:local
-    container_name: source-git-client
+    container_name: z-my-source-git-client
     tty: true
     stdin_open: true
     volumes:
