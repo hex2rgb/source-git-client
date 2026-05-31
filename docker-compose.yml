@@ -10,3 +10,9 @@ services:
     volumes:
       - /mnt/alonepool/alone/workspace-pro:/workspace
       - /mnt/user/appdata/source-git-client/ssh:/home/git/.ssh
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true
