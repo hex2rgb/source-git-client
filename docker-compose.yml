@@ -3,7 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: source-git-client:local
+    image: z-my-source-git-client:local
     container_name: z-my-source-git-client
     tty: true
     stdin_open: true
