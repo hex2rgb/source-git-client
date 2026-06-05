@@ -7,6 +7,11 @@ services:
     container_name: z-my-source-git-client
     tty: true
     stdin_open: true
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
     volumes:
       - /mnt/alonepool/alone/workspace-pro:/workspace
       - /mnt/user/appdata/source-git-client/ssh:/home/git/.ssh

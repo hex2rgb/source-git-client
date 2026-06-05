@@ -1,0 +1,22 @@
+services:
+  new-api:
+    image: calciumion/new-api:latest
+    container_name: z-my-new-api
+    ports:
+      - "30000:3000"
+    volumes:
+      - /mnt/user/appdata/new-api:/data
+    environment:
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    networks:
+      my-service-net:
+        ipv4_address: 172.18.0.19
+
+networks:
+  my-service-net:
+    external: true

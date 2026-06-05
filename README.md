@@ -1,128 +1,34 @@
-# Source Git Client
+# 私有 Docker 工具集合
 
-这是一个给 Unraid 使用的专用 Git 客户端容器。
+个人私有 Docker 工具集合仓库。每个工具独立目录、独立启动、互无依赖。
 
-它的目标很简单：不在 Unraid 宿主机上安装或使用 Git，也不把 SSH key 放到宿主机用户目录里。Git、SSH、编辑器和交互环境都放在 Docker 容器里；源码统一写入宿主机指定目录。
+## 工具列表
 
-## 功能
+### git-client — Git 客户端
 
-- 使用 SSH 访问私有 Git 仓库
-- 执行 `git clone`、`git pull`、`git fetch`
-- 使用真实 Linux 用户 `git`
-- 固定用户 ID 为 `UID 99 / GID 100`
-- 文件写入 `/workspace` 后，在标准 Unraid 环境中对应 `nobody:users`
-- 提供 Bash、命令补全、Git 补全、Nano、Vim/Vi
-- 支持中文 UTF-8 显示
-- 容器常驻运行，方便随时 `docker exec` 进入使用
-
-## 镜像
-
-镜像基于：
-
-```text
-debian:bookworm-slim
-```
-
-默认使用清华 Debian 软件源：
-
-```text
-http://mirrors.tuna.tsinghua.edu.cn/debian
-http://mirrors.tuna.tsinghua.edu.cn/debian-security
-```
-
-如果要改成阿里云源，可以在 `docker-compose.yml` 的 `build.args` 中传入：
-
-```yaml
-build:
-  context: .
-  dockerfile: Dockerfile
-  args:
-    APT_MIRROR: http://mirrors.aliyun.com/debian
-    APT_SECURITY_MIRROR: http://mirrors.aliyun.com/debian-security
-```
-
-## 宿主机目录
-
-源码目录：
-
-```text
-/mnt/alonepool/alone/workspace-pro
-```
-
-挂载到容器内：
-
-```text
-/workspace
-```
-
-SSH 目录：
-
-```text
-/mnt/user/appdata/source-git-home/ssh
-```
-
-挂载到容器内：
-
-```text
-/home/git/.ssh
-```
-
-预期 SSH 文件位置：
-
-```text
-/mnt/user/appdata/source-git-home/ssh/id_ed25519
-/mnt/user/appdata/source-git-home/ssh/id_ed25519.pub
-/mnt/user/appdata/source-git-home/ssh/known_hosts
-```
-
-## 构建并启动
+基于 Debian 12 的 Git 客户端容器，用于 Unraid 环境。
 
 ```sh
-docker compose up -d --build
+cd git-client && docker compose up -d --build
 ```
 
-也可以直接执行启动脚本：
+- 数据卷：`/mnt/alonepool/alone/workspace-pro:/workspace`
+- SSH 密钥：`/mnt/user/appdata/source-git-client/ssh:/home/git/.ssh`
+- 进入容器：`docker exec -it z-my-source-git-client bash`
+
+### new-api — AI 模型网关
+
+基于 calciumion/new-api 的统一 AI 模型网关，支持多模型聚合与分发。
 
 ```sh
-bash start.sh
+cd new-api && docker compose up -d
 ```
 
-## 进入容器
+- 端口映射：`30000:3000`
+- 数据卷：`/mnt/user/appdata/new-api:/data`
+- 默认账号：`root` / `123456`
+- 固定 IP：`172.18.0.19`
 
-```sh
-docker exec -it source-git-client bash
-```
+## 新增工具
 
-## 拉取仓库
-
-```sh
-cd /workspace
-git clone git@github.com:OWNER/REPO.git
-```
-
-## 更新仓库
-
-```sh
-cd /workspace/REPO
-git pull
-```
-
-## 容器用户环境
-
-- 用户：`git`
-- UID：`99`
-- GID：`100`
-- Home：`/home/git`
-- Shell：`/bin/bash`
-- SSH 路径：`/home/git/.ssh`
-- 工作目录：`/workspace`
-- Locale：`zh_CN.UTF-8`
-- 默认编辑器：`vim`
-
-`Dockerfile` 会在构建时校验 `git` 用户是否确实为 `UID 99 / GID 100`。如果不满足，构建会直接失败。
-
-## 说明
-
-当前只持久化 SSH 目录 `/home/git/.ssh`，没有持久化整个 `/home/git`。这对 SSH key 和 `known_hosts` 已经足够。
-
-如果以后需要持久化 Git 全局配置，例如 `/home/git/.gitconfig`，可以把整个 home 目录挂载出来。
+新建目录，放入 `docker-compose.yml`，在本 README 添加索引即可。

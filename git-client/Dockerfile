@@ -49,6 +49,7 @@ ENV HOME=/home/git
 ENV LANG=zh_CN.UTF-8
 ENV LANGUAGE=zh_CN:zh:en_US:en
 ENV LC_ALL=zh_CN.UTF-8
+ENV TZ=Asia/Shanghai
 ENV EDITOR=vim
 WORKDIR /workspace
 
