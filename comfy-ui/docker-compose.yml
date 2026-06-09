@@ -20,7 +20,7 @@ services:
       - /mnt/user/appdata/comfyui130v2/storage-user/user-profile:/root/ComfyUI/user
       - /mnt/user/appdata/comfyui130v2/storage-user/user-scripts:/root/user-scripts
     oom_score_adj: 1000                 # 内存不足时优先杀此容器
-    restart: unless-stopped
+    restart: "no" # unless-stopped
     deploy:
       restart_policy:
         condition: on-failure
