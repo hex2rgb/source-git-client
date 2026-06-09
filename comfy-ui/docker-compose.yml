@@ -1,0 +1,41 @@
+services:
+  comfy-ui:
+    image: yanwk/comfyui-boot:cu130-slim-v2
+    container_name: z-my-comfy-ui-130-v2
+    ports:
+      - "18188:8188"                    # 宿主机:容器
+    environment:
+      - TZ=Asia/Shanghai
+      - CLI_ARGS=--reserve-vram 1       # 预留 1GB 显存防爆
+    volumes:
+      - /mnt/user/appdata/comfyui130v2/storage-cache/dot-cache:/root/.cache
+      - /mnt/user/appdata/comfyui130v2/storage-cache/dot-config:/root/.config
+      - /mnt/user/appdata/comfyui130v2/storage-nodes/dot-local:/root/.local
+      - /mnt/user/appdata/comfyui130v2/storage-nodes/custom_nodes:/root/ComfyUI/custom_nodes
+      - /mnt/user/appdata/comfyui130v2/storage-models/models:/root/ComfyUI/models
+      - /mnt/user/appdata/comfyui130v2/storage-models/hf-hub:/root/.cache/huggingface/hub
+      - /mnt/user/appdata/comfyui130v2/storage-models/torch-hub:/root/.cache/torch/hub
+      - /mnt/user/appdata/comfyui130v2/storage-user/input:/root/ComfyUI/input
+      - /mnt/user/appdata/comfyui130v2/storage-user/output:/root/ComfyUI/output
+      - /mnt/user/appdata/comfyui130v2/storage-user/user-profile:/root/ComfyUI/user
+      - /mnt/user/appdata/comfyui130v2/storage-user/user-scripts:/root/user-scripts
+    oom_score_adj: 1000                 # 内存不足时优先杀此容器
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 2
+      resources:
+        limits:
+          memory: 32G                   # 容器最大内存（宿主共 48G）
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true

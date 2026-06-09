@@ -16,6 +16,21 @@ cd git-client && docker compose up -d --build
 - SSH 密钥：`/mnt/user/appdata/source-git-client/ssh:/home/git/.ssh`
 - 进入容器：`docker exec -it z-my-source-git-client bash`
 
+### comfy-ui — ComfyUI（Stable Diffusion）
+
+基于 yanwk/comfyui-boot:cu130-slim-v2 的 ComfyUI 容器，带 NVIDIA GPU 支持。
+
+```sh
+cd comfy-ui && docker compose up -d
+```
+
+- 端口映射：`18188:8188`
+- 模型卷：`storage-models/`（models / hf-hub / torch-hub）
+- 自定义节点：`storage-nodes/custom_nodes`
+- 用户数据：`storage-user/`（input / output / user-profile / user-scripts）
+- 缓存：`storage-cache/`（dot-cache / dot-config）
+- 需启用 NVIDIA Container Toolkit
+
 ### new-api — AI 模型网关
 
 基于 calciumion/new-api 的统一 AI 模型网关，支持多模型聚合与分发。
