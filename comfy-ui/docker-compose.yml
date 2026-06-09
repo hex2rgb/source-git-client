@@ -34,7 +34,8 @@ services:
               count: all
               capabilities: [gpu]
     networks:
-      - my-service-net
+      my-service-net:
+        ipv4_address: 172.18.0.39
 
 networks:
   my-service-net:
