@@ -26,8 +26,8 @@ services:
         condition: on-failure
         max_attempts: 2
       resources:
-        limits:
-          memory: 32G                   # 容器最大内存（宿主共 48G）
+        # limits:                       # Unraid 内核未开启 swapaccount=1，设 memory limit 会触发
+        #   memory: 32G                 # "Your kernel does not support swap limit" 警告，故注释掉
         reservations:
           devices:
             - driver: nvidia
