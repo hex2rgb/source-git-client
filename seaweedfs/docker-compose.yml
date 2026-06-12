@@ -1,3 +1,4 @@
+# 暂时废弃，使用的是路径使用 minio/minio:RELEASE.2025-04-22T22-12-26Z 完整web 版本
 services:
   seaweedfs:
     image: chrislusf/seaweedfs:latest
