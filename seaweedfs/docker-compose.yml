@@ -5,8 +5,8 @@ services:
     ports:
       - "29333:9333"
       - "28080:8080"
-      - "28888:8888" # Web 文件管理界面
-      - "28333:8333" # 新增 S3 接口端口
+      - "28888:8888"
+      - "28333:8333"
     volumes:
       - /mnt/user/alone/seaweedfs_data:/data
     environment:
@@ -16,11 +16,9 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 3
-    # 开启S3 + Web登录账号密码，自行修改用户名/密码
     command: >
       server -dir=/data
-      -s3
-      -filer.password=admin:123456
+      -filer -s3 -filer.password=admin:123456
     networks:
       - my-service-net
 
