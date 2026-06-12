@@ -16,9 +16,7 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 3
-    command: >
-      server -dir=/data
-      -filer -s3 -filer.password=admin:123456
+    command: server -dir=/data -filer -s3
     networks:
       - my-service-net
 
