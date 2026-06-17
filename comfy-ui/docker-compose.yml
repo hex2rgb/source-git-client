@@ -1,7 +1,7 @@
 services:
   comfy-ui:
     image: yanwk/comfyui-boot:cu130-slim-v2
-    container_name: z-my-comfy-ui-130-v2
+    container_name: comfy-ui-130-v2
     ports:
       - "18188:8188"                    # 宿主机:容器
     environment:

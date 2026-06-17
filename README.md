@@ -14,7 +14,7 @@ cd git-client && docker compose up -d --build
 
 - 数据卷：`/mnt/alonepool/alone/workspace-pro:/workspace`
 - SSH 密钥：`/mnt/user/appdata/source-git-client/ssh:/home/git/.ssh`
-- 进入容器：`docker exec -it z-my-source-git-client bash`
+- 进入容器：`docker exec -it source-git-client bash`
 
 ### comfy-ui — ComfyUI（Stable Diffusion）
 

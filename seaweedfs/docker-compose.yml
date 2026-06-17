@@ -2,7 +2,7 @@
 services:
   seaweedfs:
     image: chrislusf/seaweedfs:latest
-    container_name: z-my-seaweedfs
+    container_name: seaweedfs
     ports:
       - "29333:9333"
       - "28080:8080"

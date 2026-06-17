@@ -1,7 +1,7 @@
 services:
   new-api:
     image: calciumion/new-api:latest
-    container_name: z-my-new-api
+    container_name: new-api
     ports:
       - "30000:3000"
     volumes:
