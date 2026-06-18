@@ -1,0 +1,26 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    ports:
+      - "15678:5678"
+    environment:
+      - TZ=Asia/Shanghai
+      # n8n 配置（默认 SQLite，无需外置数据库，数据存在 /home/node/.n8n）
+      - N8N_ENCRYPTION_KEY=change-me-to-a-random-string
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=168               # 保留 7 天（小时）
+      - N8N_METRICS=false
+    volumes:
+      - /mnt/user/appdata/n8n/files:/home/node/.n8n
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true

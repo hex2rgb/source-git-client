@@ -44,6 +44,18 @@ cd new-api && docker compose up -d
 - 默认账号：`root` / `123456`
 - 固定 IP：`172.18.0.19`
 
+### n8n — 工作流自动化
+
+基于 n8nio/n8n 的工作流自动化平台，默认 SQLite，即开即用。
+
+```sh
+cd n8n && docker compose up -d
+```
+
+- 端口映射：`15678:5678`
+- 数据卷：`/mnt/user/appdata/n8n/files:/home/node/.n8n`
+- 网络：`my-service-net`，其他容器可用 `n8n:5678` 调用
+
 ## 新增工具
 
 新建目录，放入 `docker-compose.yml`，在本 README 添加索引即可。
