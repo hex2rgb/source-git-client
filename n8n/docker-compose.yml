@@ -12,7 +12,7 @@ services:
       - EXECUTIONS_DATA_MAX_AGE=168               # 保留 7 天（小时）
       - N8N_METRICS=false
     volumes:
-      - /mnt/user/appdata/n8n/files:/home/node/.n8n
+      - /mnt/user/appdata/n8n:/home/node/.n8n
     restart: unless-stopped
     deploy:
       restart_policy:

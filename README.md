@@ -53,7 +53,7 @@ cd n8n && docker compose up -d
 ```
 
 - 端口映射：`15678:5678`
-- 数据卷：`/mnt/user/appdata/n8n/files:/home/node/.n8n`
+- 数据卷：`/mnt/user/appdata/n8n:/home/node/.n8n`
 - 网络：`my-service-net`，其他容器可用 `n8n:5678` 调用
 
 ## 新增工具
