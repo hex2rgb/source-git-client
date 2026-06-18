@@ -17,7 +17,7 @@ services:
       - N8N_INSTANCE_OWNER_EMAIL=n8n@example.com
       - N8N_INSTANCE_OWNER_FIRST_NAME=Admin
       - N8N_INSTANCE_OWNER_LAST_NAME=
-      - N8N_INSTANCE_OWNER_PASSWORD_HASH=$2b$12$a/VtzY2726ZbTbUu3K3OeOTcjq.wutnHyQtcDwX8EU0RnDTp3Qura
+      - N8N_INSTANCE_OWNER_PASSWORD_HASH=$2a$12$h9ATJkzjTEYZ/TdmF.MrUOOYC7oDm.tqfwdxaWC5xRqezntJpP/FS
     volumes:
       - /mnt/user/appdata/n8n:/home/node/.n8n
     restart: unless-stopped
