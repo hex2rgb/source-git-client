@@ -11,6 +11,7 @@ services:
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=168               # 保留 7 天（小时）
       - N8N_PYTHON_ENABLED=false               # 禁用 Python 任务运行器（镜像未装 Python）
+      - N8N_SECURE_COOKIE=false                # 内网 HTTP 访问，关闭安全 cookie
     volumes:
       - /mnt/user/appdata/n8n:/home/node/.n8n
     restart: unless-stopped
