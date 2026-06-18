@@ -10,8 +10,7 @@ services:
       - N8N_ENCRYPTION_KEY=change-me-to-a-random-string
       - EXECUTIONS_DATA_PRUNE=true
       - EXECUTIONS_DATA_MAX_AGE=168               # 保留 7 天（小时）
-      - N8N_METRICS=false
-      - N8N_RUNNERS_ENABLED=false              # 禁用 Python 任务运行器（镜像未装 Python）
+      - N8N_PYTHON_ENABLED=false               # 禁用 Python 任务运行器（镜像未装 Python）
     volumes:
       - /mnt/user/appdata/n8n:/home/node/.n8n
     restart: unless-stopped
