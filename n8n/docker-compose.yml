@@ -18,7 +18,7 @@ services:
       - N8N_INSTANCE_OWNER_FIRST_NAME=Admin
       - N8N_INSTANCE_OWNER_LAST_NAME=
       - N8N_INSTANCE_OWNER_PASSWORD_HASH=$$2a$$12$$h9ATJkzjTEYZ/TdmF.MrUOOYC7oDm.tqfwdxaWC5xRqezntJpP/FS
-      - N8N_ONBOARDING_FLOW_DISABLED=true
+      - N8N_PERSONALIZATION_ENABLED=false
     volumes:
       - /mnt/user/appdata/n8n:/home/node/.n8n
     restart: unless-stopped
