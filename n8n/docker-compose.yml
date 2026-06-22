@@ -1,0 +1,34 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    ports:
+      - "15678:5678"
+    environment:
+      - TZ=Asia/Shanghai
+      # n8n 配置（默认 SQLite，无需外置数据库，数据存在 /home/node/.n8n）
+      - N8N_ENCRYPTION_KEY=change-me-to-a-random-string
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=168               # 保留 7 天（小时）
+      - N8N_PYTHON_ENABLED=false               # 禁用 Python 任务运行器（镜像未装 Python）
+      - N8N_SECURE_COOKIE=false                # 内网 HTTP 访问，关闭安全 cookie
+      # 预置管理员账号（跳过首次注册页面）
+      - N8N_INSTANCE_OWNER_MANAGED_BY_ENV=true
+      - N8N_INSTANCE_OWNER_EMAIL=n8n@example.com
+      - N8N_INSTANCE_OWNER_FIRST_NAME=Admin
+      - N8N_INSTANCE_OWNER_LAST_NAME=
+      - N8N_INSTANCE_OWNER_PASSWORD_HASH=$$2a$$12$$h9ATJkzjTEYZ/TdmF.MrUOOYC7oDm.tqfwdxaWC5xRqezntJpP/FS
+      - N8N_PERSONALIZATION_ENABLED=false
+    volumes:
+      - /mnt/user/appdata/n8n:/home/node/.n8n
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true
