@@ -5,7 +5,7 @@ services:
     ports:
       - "20128:20128"
     volumes:
-      - ./data:/app/data
+      - /mnt/user/appdata/9router:/app/data
     environment:
       # 官方强制必要参数
       - DATA_DIR=/app/data
@@ -16,7 +16,7 @@ services:
       - OBSERVABILITY_ENABLED=false
       # 安全优化（可选，自用推荐）
       - INITIAL_PASSWORD=9router
-      - JWT_SECRET=9router
+      - JWT_SECRET=c801d80d43e2b2b3d5a0e08de0c9b1da9efddfa901ef97d9f37f4bcd4222eaf8
     restart: unless-stopped
     deploy:
       restart_policy:
