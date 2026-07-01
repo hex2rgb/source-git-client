@@ -28,4 +28,4 @@ services:
       - /mnt/user/outerdir/workspace:/mount
     command: >-
       -u "putong;111111;1001;users;100"
-      -s "outerdir;/mount;no;no;no;unraidsmb;unraidsmb"
+      -s "outerdir;/mount;no;no;no;putong;putong"
