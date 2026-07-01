@@ -19,18 +19,14 @@ services:
     restart: unless-stopped
     stdin_open: true
     tty: true
-    user: "1000:100"
-    tmpfs:
-      - /tmp
     ports:
       - "55445:445/tcp"
     environment:
       TZ: Asia/Shanghai
       WORKGROUP: WORKGROUP
     volumes:
-      - /mnt/user/appdata/smba:/etc/samba:rw
       - /mnt/user/outerdir:/mount:rw
     command: >-
       -u "unraidsmb;111111;1000;users;100"
-      -s "outerdir;/mount;yes;no;no;unraidsmb;unraidsmb"
-      -w "WORKGROUP"
+      -s "outerdir;/mount;no;no;no;unraidsmb;unraidsmb"
+      -p
