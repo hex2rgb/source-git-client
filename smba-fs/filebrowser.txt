@@ -1,3 +1,7 @@
 admin
 源 b8jy8imVXurHX_e3
 新密码 admin12345678
+
+unraidsmb
+putong
+putong12345678
