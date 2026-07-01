@@ -4,16 +4,6 @@ services:
     container_name: smba-fs-web
     restart: unless-stopped
     user: "1000:100"
-    entrypoint: /bin/sh
-    command: >-
-      -c "
-        db=/database/filebrowser.db;
-        if [ ! -f \"\$db\" ]; then
-          /filebrowser config init -d \"\$db\";
-          /filebrowser users add unraidsmb 111111 --admin -d \"\$db\";
-        fi;
-        exec /filebrowser -d \"\$db\"
-      "
     ports:
       - "58080:80"
     environment:
