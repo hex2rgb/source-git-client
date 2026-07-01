@@ -29,4 +29,3 @@ services:
     command: >-
       -u "unraidsmb;111111;1000;users;100"
       -s "outerdir;/mount;no;no;no;unraidsmb;unraidsmb"
-      -p
