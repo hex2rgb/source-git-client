@@ -1,6 +1,6 @@
 services:
   filebrowser:
-    image: filebrowser/
+    image: filebrowser/filebrowser
     container_name: smba-fs-web
     restart: unless-stopped
     user: "1001:100"
