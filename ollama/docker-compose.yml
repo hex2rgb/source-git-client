@@ -1,0 +1,28 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /mnt/user/appdata/ollama:/root/.ollama
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    networks:
+      my-service-net:
+        ipv4_address: 172.18.0.18
+
+networks:
+  my-service-net:
+    external: true

@@ -44,6 +44,18 @@ cd new-api && docker compose up -d
 - 默认账号：`root` / `123456`
 - 固定 IP：`172.18.0.19`
 
+### ollama — 本地大模型
+
+基于 ollama/ollama 的本地 LLM 推理服务，带 NVIDIA GPU 支持。
+
+```sh
+cd ollama && docker compose up -d
+```
+
+- 端口映射：`11434:11434`
+- 数据卷：`/mnt/user/appdata/ollama`
+- 拉取模型：`docker exec ollama ollama pull <model>`
+
 ### n8n — 工作流自动化
 
 基于 n8nio/n8n 的工作流自动化平台，默认 SQLite，即开即用。
