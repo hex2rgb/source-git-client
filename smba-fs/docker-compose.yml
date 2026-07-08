@@ -9,7 +9,7 @@ services:
     environment:
       TZ: Asia/Shanghai
     volumes:
-      - /mnt/user/outerdir:/srv
+      - /mnt/user/outerdir/workspace/remote-cc-workspace:/srv
       - /mnt/user/appdata/filebrowser/database:/database
       - /mnt/user/appdata/filebrowser/config:/config
 
@@ -25,7 +25,7 @@ services:
       TZ: Asia/Shanghai
       WORKGROUP: WORKGROUP
     volumes:
-      - /mnt/user/outerdir:/mount
+      - /mnt/user/outerdir/workspace/remote-cc-workspace:/mount
     command: >-
       -u "putong;111111;1001;users;100"
       -s "outerdir;/mount;no;no;no;putong;putong"
