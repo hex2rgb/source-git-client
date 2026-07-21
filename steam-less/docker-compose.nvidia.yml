@@ -99,7 +99,7 @@ services:
       - ${GAMES_DIR}/:/mnt/games/:rw
 
       # The Xorg socket.
-      - ${SHARED_SOCKETS_DIR}/.X11-unix/:/tmp/.X11-unix/:rw
+#      - ${SHARED_SOCKETS_DIR}/.X11-unix/:/tmp/.X11-unix/:rw
 
       # Pulse audio socket.
-      - ${SHARED_SOCKETS_DIR}/pulse/:/tmp/pulse/:rw
+#      - ${SHARED_SOCKETS_DIR}/pulse/:/tmp/pulse/:rw
