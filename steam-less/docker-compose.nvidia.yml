@@ -1,6 +1,3 @@
----
-version: "3.8"
-
 services:
   steam-headless:
     image: josh5/steam-headless:latest
