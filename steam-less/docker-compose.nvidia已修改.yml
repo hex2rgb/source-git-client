@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+  steam-headless:
+    image: josh5/steam-headless:latest
+    restart: unless-stopped
+    
+    # --- FINAL AND CORRECT CONFIGURATION ---
+    # This image's startup scripts require deep system access (to /sys, /proc, and kernel modules)
+    # to correctly generate the NVIDIA Xorg config. Therefore, privileged mode is necessary.
+    privileged: true
+
+    # It's still best practice to tell Docker which GPUs to use via the deploy block.
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu, graphics, utility, video, display]
+    # --- END OF CRITICAL CONFIGURATION ---
+
+    shm_size: ${SHM_SIZE}
+    ipc: host
+    network_mode: host
+    hostname: ${NAME}
+    extra_hosts:
+      - "${NAME}:127.0.0.1"
+    
+    environment:
+      - DISPLAY=:0
+      # We explicitly set this to false, although privileged mode should ensure it's not used.
+      - FORCE_X11_DUMMY_CONFIG=false
+      - TZ=${TZ}
+      - USER_LOCALES=${USER_LOCALES}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - UMASK=${UMASK}
+      - USER_PASSWORD=${USER_PASSWORD}
+      - MODE=${MODE}
+      - WEB_UI_MODE=${WEB_UI_MODE}
+      - ENABLE_VNC_AUDIO=${ENABLE_VNC_AUDIO}
+      - PORT_NOVNC_WEB=${PORT_NOVNC_WEB}
+      - NEKO_NAT1TO1=${NEKO_NAT1TO1}
+      - ENABLE_STEAM=${ENABLE_STEAM}
+      - STEAM_ARGS=${STEAM_ARGS}
+      - ENABLE_SUNSHINE=${ENABLE_SUNSHINE}
+      - SUNSHINE_USER=${SUNSHINE_USER}
+      - SUNSHINE_PASS=${SUNSHINE_PASS}
+      - ENABLE_EVDEV_INPUTS=${ENABLE_EVDEV_INPUTS}
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_VERSION=${NVIDIA_DRIVER_VERSION}
+
+    volumes:
+      # NOTE: In privileged mode, the container has wide access. 
+      # Ensure your volume paths are correct and secure.
+      - ${HOME_DIR}/:/home/default/:rw
+      - ${GAMES_DIR}/:/mnt/games/:rw
+      - ${SHARED_SOCKETS_DIR}/.X11-unix/:/tmp/.X11-unix/:rw
+      - ${SHARED_SOCKETS_DIR}/pulse/:/tmp/pulse/:rw
