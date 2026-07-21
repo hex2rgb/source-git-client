@@ -1,7 +1,7 @@
 services:
   steam-headless:
     image: josh5/steam-headless:latest
-    container_name: ${NAME}
+    container_name: gamer-steam
     restart: unless-stopped
     shm_size: ${SHM_SIZE}
     ipc: host # Could also be set to 'shareable'
