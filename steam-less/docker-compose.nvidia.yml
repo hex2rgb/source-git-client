@@ -1,7 +1,7 @@
 services:
   steam-headless:
     image: josh5/steam-headless:latest
-    container_name: gamer-steam
+    container_name: ${NAME}
     restart: unless-stopped
     shm_size: ${SHM_SIZE}
     ipc: host # Could also be set to 'shareable'
@@ -27,7 +27,13 @@ services:
     hostname: ${NAME}
     extra_hosts:
       - "${NAME}:127.0.0.1"
-    
+
+    # UNRAID LABELS:
+    labels:
+      - "net.unraid.docker.managed=dockerman"
+      - "net.unraid.docker.webui=http://[IP]:[PORT:8083]/"
+      - "net.unraid.docker.icon=https://raw.githubusercontent.com/Josh5/docker-steam-headless/master/images/steam-icon.png"
+
     # ENVIRONMENT:
     ## Read all config variables from the .env file
     environment:

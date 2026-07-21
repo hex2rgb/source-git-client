@@ -40,3 +40,5 @@ docker run
   --cap-add='SYS_NICE'
   --security-opt='seccomp=unconfined' 'josh5/steam-headless:latest'
 a779b695056ce4a2e7916a3a294b7274898ca9da403c4a629ce3f2e7dcc1a23f
+
+--hostname='SteamHeadless' --add-host='SteamHeadless:127.0.0.1' --restart='unless-stopped' --shm-size='2G' --ipc='host' -v '/tmp/.X11-unix/':'/tmp/.X11-unix/':'rw' -v '/tmp/pulse/':'/tmp/pulse/':'rw' --ulimit='nofile=1024:524288' --device='/dev/fuse' --device='/dev/uinput' --device-cgroup-rule='c 13:* rmw' --cap-add='NET_ADMIN' --cap-add='SYS_ADMIN' --cap-add='SYS_NICE' --security-opt='seccomp=unconfined'
