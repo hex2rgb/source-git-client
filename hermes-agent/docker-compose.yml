@@ -14,15 +14,15 @@ services:
       - API_SERVER_HOST=0.0.0.0    # 局域网访问
       - API_SERVER_KEY=123456
       - HERMES_DASHBOARD_HOST=0.0.0.0
-      - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=admin
-      - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=admin123
+      - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=hermes
+      - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=hermes
       # 取消注释以直接转发特定环境变量而非使用 .env 文件：
       # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       # - OPENAI_API_KEY=${OPENAI_API_KEY}
       # - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
     labels:
       - "net.unraid.docker.managed=dockerman"
-      - "net.unraid.docker.webui=http://[IP]:[PORT:8642]/"
+      - "net.unraid.docker.webui=http://[IP]:[PORT:9119]/"
       - "net.unraid.docker.icon=https://raw.githubusercontent.com/medzin/docker-templates/main/images/hermes-agent-icon.png"
     networks:
       - my-service-net
