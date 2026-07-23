@@ -19,11 +19,9 @@ services:
       - "net.unraid.docker.managed=dockerman"
       - "net.unraid.docker.webui=http://[IP]:[PORT:8642]/"
       - "net.unraid.docker.icon=https://raw.githubusercontent.com/medzin/docker-templates/main/images/hermes-agent-icon.png"
-    deploy:
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
-      resources:
-        limits:
-          memory: 4G
-          cpus: "2.0"
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true
