@@ -1,0 +1,29 @@
+services:
+  hermes:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes
+    restart: unless-stopped
+    command: gateway run
+    ports:
+      - "8642:8642"   # gateway API
+      - "9119:9119"   # dashboard（仅在 HERMES_DASHBOARD=1 时生效）
+    volumes:
+      - /mnt/user/appdata/hermes:/opt/data
+    environment:
+      - HERMES_DASHBOARD=1
+      # 取消注释以直接转发特定环境变量而非使用 .env 文件：
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # - OPENAI_API_KEY=${OPENAI_API_KEY}
+      # - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+    labels:
+      - "net.unraid.docker.managed=dockerman"
+      - "net.unraid.docker.webui=http://[IP]:[PORT:8642]/"
+      - "net.unraid.docker.icon=https://raw.githubusercontent.com/medzin/docker-templates/main/images/hermes-agent-icon.png"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2.0"
