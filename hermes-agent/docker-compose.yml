@@ -13,6 +13,9 @@ services:
       - HERMES_DASHBOARD=1
       - API_SERVER_HOST=0.0.0.0    # 局域网访问
       - API_SERVER_KEY=123456
+      - HERMES_DASHBOARD_HOST=0.0.0.0
+      - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=admin
+      - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=admin123
       # 取消注释以直接转发特定环境变量而非使用 .env 文件：
       # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       # - OPENAI_API_KEY=${OPENAI_API_KEY}
