@@ -1,0 +1,35 @@
+services:
+  hermes:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes
+    restart: unless-stopped
+    command: gateway run
+    ports:
+      - "8642:8642"   # gateway API
+      - "9119:9119"   # dashboard（仅在 HERMES_DASHBOARD=1 时生效）
+    volumes:
+      - /mnt/user/appdata/hermes:/opt/data
+    environment:
+      - HERMES_UID=1000
+      - HERMES_GID=100
+      - HERMES_DASHBOARD=1
+      - API_SERVER_ENABLED=true
+      - API_SERVER_HOST=0.0.0.0    # 局域网访问
+      - API_SERVER_KEY=asdfghjkl123456789
+      - HERMES_DASHBOARD_HOST=0.0.0.0
+      - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=hermes
+      - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=hermes
+      # 取消注释以直接转发特定环境变量而非使用 .env 文件：
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      # - OPENAI_API_KEY=${OPENAI_API_KEY}
+      # - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+    labels:
+      - "net.unraid.docker.managed=dockerman"
+      - "net.unraid.docker.webui=http://[IP]:[PORT:9119]/"
+      - "net.unraid.docker.icon=https://raw.githubusercontent.com/medzin/docker-templates/main/images/hermes-agent-icon.png"
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true
