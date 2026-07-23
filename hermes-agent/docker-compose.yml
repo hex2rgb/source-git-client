@@ -11,8 +11,9 @@ services:
       - /mnt/user/appdata/hermes:/opt/data
     environment:
       - HERMES_DASHBOARD=1
+      - API_SERVER_ENABLED=true
       - API_SERVER_HOST=0.0.0.0    # 局域网访问
-      - API_SERVER_KEY=123456
+      - API_SERVER_KEY=asdfghjkl123456789
       - HERMES_DASHBOARD_HOST=0.0.0.0
       - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=hermes
       - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=hermes
