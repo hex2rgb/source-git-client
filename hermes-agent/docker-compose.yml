@@ -14,8 +14,8 @@ services:
       - HERMES_GID=100
       - HERMES_DASHBOARD=1
       - API_SERVER_ENABLED=false
-      - API_SERVER_HOST=0.0.0.0    # 局域网访问
-      - API_SERVER_KEY=asdfghjkl123456789
+#      - API_SERVER_HOST=0.0.0.0    # 局域网访问
+#      - API_SERVER_KEY=asdfghjkl123456789
       - HERMES_DASHBOARD_HOST=0.0.0.0
       - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=hermes
       - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=hermes
