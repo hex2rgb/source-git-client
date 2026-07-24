@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     command: gateway run
     ports:
-      - "8642:8642"   # gateway API
+#      - "8642:8642"   # gateway API
       - "9119:9119"   # dashboard（仅在 HERMES_DASHBOARD=1 时生效）
     volumes:
       - /mnt/user/appdata/hermes:/opt/data
