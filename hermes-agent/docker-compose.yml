@@ -8,7 +8,8 @@ services:
 #      - "8642:8642"   # gateway API
       - "9119:9119"   # dashboard（仅在 HERMES_DASHBOARD=1 时生效）
     volumes:
-      - /mnt/user/appdata/hermes:/opt/data
+      - /data/volume/hermes:/opt/data
+#      - /mnt/user/appdata/hermes:/opt/data
     environment:
       - HERMES_UID=1000
       - HERMES_GID=100
@@ -23,12 +24,13 @@ services:
       # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       # - OPENAI_API_KEY=${OPENAI_API_KEY}
       # - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
-    labels:
-      - "net.unraid.docker.managed=dockerman"
-      - "net.unraid.docker.webui=http://[IP]:[PORT:9119]/"
-      - "net.unraid.docker.icon=https://raw.githubusercontent.com/medzin/docker-templates/main/images/hermes-agent-icon.png"
+#    labels:
+#      - "net.unraid.docker.managed=dockerman"
+#      - "net.unraid.docker.webui=http://[IP]:[PORT:9119]/"
+#      - "net.unraid.docker.icon=https://raw.githubusercontent.com/medzin/docker-templates/main/images/hermes-agent-icon.png"
     networks:
-      - my-service-net
+      my-service-net:
+        ipv4_address: 172.19.0.98
 
 networks:
   my-service-net:
