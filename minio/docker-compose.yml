@@ -1,0 +1,26 @@
+services:
+  minio:
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    container_name: minio
+    command: ["server", "/data", "--console-address", ":9001"]
+    ports:
+      - "19000:9000"                    # API
+      - "19001:9001"                    # Console
+    environment:
+      - TZ=Asia/Shanghai
+      - MINIO_ROOT_USER=root
+      - MINIO_ROOT_PASSWORD=12345678
+    volumes:
+      - /data/volume/minio_data:/data
+      - /data/volume/minio:/root/.minio
+    pids_limit: 2048
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    networks:
+      - my-service-net
+networks:
+  my-service-net:
+    external: true
