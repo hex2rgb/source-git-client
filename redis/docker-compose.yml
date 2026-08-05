@@ -1,0 +1,23 @@
+services:
+  redis:
+    image: redis:7.4.10-alpine
+    container_name: redis
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    ports:
+      - "16379:6379"
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - /data/volume/redis/data:/data
+      - /data/volume/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true

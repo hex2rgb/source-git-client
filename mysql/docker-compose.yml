@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: mysql:9.7.0
+    container_name: mysql
+    ports:
+      - "13306:3306"
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=change-me-to-a-random-string
+    volumes:
+      - /data/volume/mysql/data:/var/lib/mysql
+      - /data/volume/mysql/logs:/var/log/mysql
+      - /data/volume/mysql/conf.d:/etc/mysql/conf.d
+      - /data/volume/mysql/initdb:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true
