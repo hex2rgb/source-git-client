@@ -13,7 +13,7 @@ services:
         condition: on-failure
         max_attempts: 3
     volumes:
-      - /mnt/user/appdata/claude-lark:/data
+      - /data/volum/claude-lark:/data
     networks:
       - my-service-net
 
