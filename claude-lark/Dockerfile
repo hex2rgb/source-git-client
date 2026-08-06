@@ -1,6 +1,6 @@
 FROM node:22-bookworm-slim
 
-ARG APT_MIRROR=https://mirrors.tuna.tsinghua.edu.cn/debian
+ARG APT_MIRROR=https://mirrors.tuna.tsinghua.edu.cn
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Shanghai
