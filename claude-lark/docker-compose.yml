@@ -1,0 +1,22 @@
+services:
+  claude-lark:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: claude-lark:local
+    container_name: claude-lark
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 3
+    volumes:
+      - /mnt/user/appdata/claude-lark:/data
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true
