@@ -58,8 +58,11 @@ RUN set -eux; \
   npm config set registry https://registry.npmmirror.com \
   && npm install -g @anthropic-ai/claude-code @larksuite/cli lark-channel-bridge
 
-# 6) 镜像内置 claude 配置默认; 外部挂载 /data 时以挂载内容为准
-COPY .claude/settings.json /data/.claude/settings.json
+# 6) 镜像内置 claude 配置默认, 启动时初始化进持久卷 (已有则不覆盖)
+COPY .claude/settings.json /opt/claude-lark/settings.json
+COPY entrypoint.sh /usr/local/bin/claude-lark-entrypoint
+RUN chmod +x /usr/local/bin/claude-lark-entrypoint
+ENTRYPOINT ["/usr/local/bin/claude-lark-entrypoint"]
 
 # 7) 非 root 用户: claude-code 拒绝 root 用 --dangerously-skip-permissions
 #    用宿主已有用户 serveradmin (uid/gid 1000), 卷权限对齐
