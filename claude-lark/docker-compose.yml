@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     image: claude-lark:local
     container_name: claude-lark
+    hostname: claude-lark
     tty: true
     stdin_open: true
     restart: unless-stopped
