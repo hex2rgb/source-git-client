@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12-slim-bookworm
 
 ARG APT_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian
 ARG APT_SECURITY_MIRROR=http://mirrors.tuna.tsinghua.edu.cn/debian-security
@@ -23,6 +23,7 @@ RUN set -eux; \
     git \
     jq \
     locales \
+    nano \
     openssh-client \
     tzdata \
     unzip \
