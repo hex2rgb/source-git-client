@@ -29,7 +29,11 @@ RUN set -eux; \
     unzip \
     vim-tiny \
     wget \
+    xz-utils \
     zip \
+  && sed -i 's/^# *\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen \
+  && sed -i 's/^# *\(zh_CN.UTF-8 UTF-8\)/\1/' /etc/locale.gen \
+  && locale-gen \
   && rm -rf /var/lib/apt/lists/*
 
 # 2) Node 22 (官方 tarball, 版本固定) -> /usr/local
@@ -49,8 +53,10 @@ RUN mkdir -p /data
 ENV HOME=/data
 ENV CLAUDE_CONFIG_DIR=/data/.claude
 
-# 5) 全局 CLI
-RUN npm install -g @anthropic-ai/claude-code @larksuite/cli lark-channel-bridge
+# 5) 全局 CLI (npm 走 npmmirror, 同清华源思路)
+RUN set -eux; \
+  npm config set registry https://registry.npmmirror.com \
+  && npm install -g @anthropic-ai/claude-code @larksuite/cli lark-channel-bridge
 
 ENV LANG=zh_CN.UTF-8
 ENV LANGUAGE=zh_CN:zh:en_US:en
