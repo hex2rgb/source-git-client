@@ -58,6 +58,16 @@ RUN set -eux; \
   npm config set registry https://registry.npmmirror.com \
   && npm install -g @anthropic-ai/claude-code @larksuite/cli lark-channel-bridge
 
+# 6) 镜像内置 claude 配置默认; 外部挂载 /data 时以挂载内容为准
+COPY .claude/settings.json /data/.claude/settings.json
+
+# 7) 非 root 用户: claude-code 拒绝 root 用 --dangerously-skip-permissions
+#    用宿主已有用户 serveradmin (uid/gid 1000), 卷权限对齐
+RUN groupadd --gid 1000 serveradmin \
+  && useradd --uid 1000 --gid 1000 --create-home --shell /bin/bash serveradmin \
+  && chown -R serveradmin:serveradmin /data
+USER serveradmin
+
 ENV LANG=zh_CN.UTF-8
 ENV LANGUAGE=zh_CN:zh:en_US:en
 ENV LC_ALL=zh_CN.UTF-8
