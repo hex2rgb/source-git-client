@@ -26,6 +26,11 @@ services:
     container_name: claude-lark-secretary
     volumes:
       - /data/volume/claude-lark-secretary:/data
+  claude-lark-secretary-self:
+    <<: *claude-lark
+    container_name: claude-lark-secretary-self
+    volumes:
+      - /data/volume/claude-lark-secretary-self:/data
 
 networks:
   my-service-net:
