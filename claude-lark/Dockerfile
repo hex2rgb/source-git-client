@@ -59,7 +59,7 @@ RUN set -eux; \
   && npm install -g @anthropic-ai/claude-code @larksuite/cli lark-channel-bridge
 
 # 6) 镜像内置 claude 配置默认, 启动时初始化进持久卷 (已有则不覆盖)
-COPY .claude/settings.json /opt/claude-lark/settings.json
+COPY .claude/ /opt/claude-lark/
 COPY entrypoint.sh /usr/local/bin/claude-lark-entrypoint
 RUN chmod +x /usr/local/bin/claude-lark-entrypoint
 ENTRYPOINT ["/usr/local/bin/claude-lark-entrypoint"]
