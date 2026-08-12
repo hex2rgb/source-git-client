@@ -14,20 +14,27 @@ x-claude-lark: &claude-lark
   networks:
     - my-service-net
 
+# 错峰启动: 同镜像实例按 START_DELAY 秒错开, 避免同时打爆上游; 间隔可调
 services:
   claude-lark:
     <<: *claude-lark
     container_name: claude-lark
+    environment:
+      START_DELAY: "0"
     volumes:
       - /data/volume/claude-lark:/data
   claude-lark-secretary:
     <<: *claude-lark
     container_name: claude-lark-secretary
+    environment:
+      START_DELAY: "15"
     volumes:
       - /data/volume/claude-lark-secretary:/data
   claude-lark-secretary-self:
     <<: *claude-lark
     container_name: claude-lark-secretary-self
+    environment:
+      START_DELAY: "35"
     volumes:
       - /data/volume/claude-lark-secretary-self:/data
 
