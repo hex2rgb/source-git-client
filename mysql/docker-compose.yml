@@ -13,10 +13,10 @@ services:
       - /data/volume/mysql/conf.d:/etc/mysql/conf.d
       - /data/volume/mysql/initdb:/docker-entrypoint-initdb.d
     restart: unless-stopped
-    deploy:
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
+#    deploy:
+#      restart_policy:
+#        condition: on-failure
+#        max_attempts: 3
     networks:
       - my-service-net
 
