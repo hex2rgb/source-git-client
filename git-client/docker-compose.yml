@@ -13,7 +13,7 @@ services:
         condition: on-failure
         max_attempts: 3
     volumes:
-      - /mnt/alonepool/alone/workspace-pro:/workspace
+      - /mnt/user/appdata/git-client/workspace:/workspace
       - /mnt/user/appdata/git-client/ssh:/home/git/.ssh
     networks:
       - my-service-net
