@@ -16,9 +16,9 @@ services:
     pids_limit: 2048
     restart: unless-stopped
     deploy:
-      restart_policy:
-        condition: on-failure
-        max_attempts: 3
+#      restart_policy:
+#        condition: on-failure
+#        max_attempts: 3
     networks:
       - my-service-net
 networks:
