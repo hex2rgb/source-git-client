@@ -13,7 +13,7 @@ services:
         condition: on-failure
         max_attempts: 3
     volumes:
-      - /mnt/user/appdata/git-client/workspace:/workspace
+      - /mnt/user/sharedownload/workspace:/workspace
       - /mnt/user/appdata/git-client/ssh:/home/git/.ssh
     networks:
       - my-service-net
