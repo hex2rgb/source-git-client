@@ -21,7 +21,6 @@ services:
     volumes:
       - /mnt/user/appdata/mariadb-official/data:/var/lib/mysql
       - /mnt/user/appdata/mariadb-official/config:/etc/mysql/conf.d
-    pids_limit: 2048
     restart: unless-stopped
     deploy:
 #      restart_policy:
@@ -30,6 +29,7 @@ services:
       resources:
         limits:
           memory: 2G
+          pids: 2048
     networks:
       - my-service-net
 
