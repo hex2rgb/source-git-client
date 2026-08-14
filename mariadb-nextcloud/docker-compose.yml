@@ -1,0 +1,38 @@
+services:
+  mariadb-nextcloud:
+    image: mariadb
+    container_name: mariadb-nextcloud
+    user: "99:100"
+    ports:
+      - "3306:3306"
+    environment:
+      - TZ=Asia/Shanghai
+      - HOST_OS=Unraid
+      - HOST_HOSTNAME=Tower
+      - HOST_CONTAINERNAME=mariadb-nextcloud
+      - MARIADB_RANDOM_ROOT_PASSWORD=Yes
+      - MARIADB_DATABASE=nextcloud
+      - MARIADB_USER=nextcloud
+      - MARIADB_PASSWORD=nextcloud
+      - MARIADB_ROOT_PASSWORD=nextcloud
+    labels:
+      - net.unraid.docker.managed=dockerman
+      - net.unraid.docker.icon=https://github.com/mgutt/unraid-docker-templates/raw/main/mgutt/images/mariadb.png
+    volumes:
+      - /mnt/user/appdata/mariadb-official/data:/var/lib/mysql
+      - /mnt/user/appdata/mariadb-official/config:/etc/mysql/conf.d
+    pids_limit: 2048
+    restart: unless-stopped
+    deploy:
+#      restart_policy:
+#        condition: on-failure
+#        max_attempts: 3
+      resources:
+        limits:
+          memory: 2G
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true

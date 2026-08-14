@@ -1,0 +1,32 @@
+services:
+  nextcloud:
+    image: nextcloud:latest
+    container_name: Nextcloud
+    user: "99:100"
+    ports:
+      - "8666:80"
+    environment:
+      - TZ=Asia/Shanghai
+      - HOST_OS=Unraid
+      - HOST_HOSTNAME=Tower
+      - HOST_CONTAINERNAME=Nextcloud
+      - PHP_MEMORY_LIMIT=1G
+      - PHP_UPLOAD_LIMIT=20G
+      - APACHE_BODY_LIMIT=0
+      - IP_UPLOAD_LIMIT=20G
+    labels:
+      - net.unraid.docker.managed=dockerman
+      - net.unraid.docker.webui=http://[IP]:[PORT:80]
+      - net.unraid.docker.icon=https://raw.githubusercontent.com/maschhoff/docker/master/unraid%20xml/nextcloud_logo_square.png
+    volumes:
+      - /mnt/user/appdata/nextcloud/html:/var/www/html
+      - /mnt/user/appdata/nextcloud/apps:/var/www/html/custom_apps
+      - /mnt/user/appdata/nextcloud/config:/var/www/html/config
+      - /mnt/user/nextcloud/:/var/www/html/data
+    restart: unless-stopped
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true
