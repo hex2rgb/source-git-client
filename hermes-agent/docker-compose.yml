@@ -20,7 +20,6 @@ services:
       - HERMES_DASHBOARD_HOST=0.0.0.0
       - HERMES_DASHBOARD_BASIC_AUTH_USERNAME=hermes
       - HERMES_DASHBOARD_BASIC_AUTH_PASSWORD=hermes
-      - HERMES_DISABLE_LAZY_INSTALLS=true
       # 取消注释以直接转发特定环境变量而非使用 .env 文件：
       # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
       # - OPENAI_API_KEY=${OPENAI_API_KEY}
