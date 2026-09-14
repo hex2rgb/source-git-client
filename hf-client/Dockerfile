@@ -26,6 +26,7 @@ RUN set -eux; \
     openssh-client \
     python3 \
     python3-pip \
+    python3-venv \
     tmux \
     vim-tiny \
   && rm -rf /var/lib/apt/lists/*
