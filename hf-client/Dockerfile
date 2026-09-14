@@ -24,6 +24,8 @@ RUN set -eux; \
     locales \
     nano \
     openssh-client \
+    python3 \
+    python3-pip \
     tmux \
     vim-tiny \
   && rm -rf /var/lib/apt/lists/*
