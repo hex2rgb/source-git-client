@@ -31,7 +31,12 @@ RUN set -eux; \
     vim-tiny \
   && rm -rf /var/lib/apt/lists/*
 
+# export (not ENV): HF_HOME must not persist, or the hf user's model cache would
+# land in /opt instead of the mounted /home/git/.cache/huggingface volume.
+# Install outside /root so the non-root `git` user can exec the venv, and put the
+# symlink in /usr/local/bin so `docker exec hf-client hf ...` works without a login shell.
 RUN set -eux; \
+  export HF_HOME=/opt/hf-cli HF_CLI_BIN_DIR=/usr/local/bin; \
   curl -LsSf https://hf.co/cli/install.sh | bash
 
 RUN set -eux; \
