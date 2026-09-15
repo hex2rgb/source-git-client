@@ -32,8 +32,8 @@ RUN set -eux; \
   && rm -rf /var/lib/apt/lists/*
 
 # export (not ENV): HF_HOME must not persist, or the hf user's model cache would
-# land in /opt instead of the mounted /home/git/.cache/huggingface volume.
-# Install outside /root so the non-root `git` user can exec the venv, and put the
+# land in /opt instead of the mounted /home/hf/.cache/huggingface volume.
+# Install outside /root so the non-root `hf` user can exec the venv, and put the
 # symlink in /usr/local/bin so `docker exec hf-client hf ...` works without a login shell.
 RUN set -eux; \
   export HF_HOME=/opt/hf-cli HF_CLI_BIN_DIR=/usr/local/bin; \
@@ -41,14 +41,14 @@ RUN set -eux; \
 
 RUN set -eux; \
   grep -q '^users:x:100:' /etc/group \
-  && useradd --uid 99 --gid 100 --home-dir /home/git --create-home --shell /bin/bash git \
-  && test "$(id -u git)" = "99" \
-  && test "$(id -g git)" = "100" \
+  && useradd --uid 99 --gid 100 --home-dir /home/hf --create-home --shell /bin/bash hf \
+  && test "$(id -u hf)" = "99" \
+  && test "$(id -g hf)" = "100" \
   && sed -i 's/^# *\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen \
   && sed -i 's/^# *\(zh_CN.UTF-8 UTF-8\)/\1/' /etc/locale.gen \
   && locale-gen \
   && ln -sf /usr/bin/bash /usr/bin/sh \
-  && mkdir -p /workspace /home/git/.ssh /home/git/.cache/huggingface \
+  && mkdir -p /workspace /home/hf/.ssh /home/hf/.cache/huggingface \
   && printf '%s\n' \
     'if [ -f /etc/profile.d/bash_completion.sh ]; then' \
     '  . /etc/profile.d/bash_completion.sh' \
@@ -57,11 +57,11 @@ RUN set -eux; \
     'export PATH="$HOME/.local/bin:$PATH"' \
     'alias ll="ls -lh"' \
     'alias la="ls -lha"' \
-    > /home/git/.bashrc \
-  && chown -R git:users /workspace /home/git
+    > /home/hf/.bashrc \
+  && chown -R hf:users /workspace /home/hf
 
-USER git
-ENV HOME=/home/git
+USER hf
+ENV HOME=/home/hf
 ENV LANG=zh_CN.UTF-8
 ENV LANGUAGE=zh_CN:zh:en_US:en
 ENV LC_ALL=zh_CN.UTF-8

@@ -14,8 +14,8 @@ services:
         max_attempts: 3
     volumes:
       - /mnt/user/sharedownload/download:/workspace
-      - /mnt/user/appdata/hf-client/cache:/home/git/.cache/huggingface
-      - /mnt/user/appdata/hf-client/ssh:/home/git/.ssh
+      - /mnt/user/appdata/hf-client/cache:/home/hf/.cache/huggingface
+      - /mnt/user/appdata/hf-client/ssh:/home/hf/.ssh
     networks:
       - my-service-net
 
