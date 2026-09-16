@@ -28,6 +28,10 @@ services:
 #      - "net.unraid.docker.managed=dockerman"
 #      - "net.unraid.docker.webui=http://[IP]:[PORT:9119]/"
 #      - "net.unraid.docker.icon=https://raw.githubusercontent.com/medzin/docker-templates/main/images/hermes-agent-icon.png"
+    deploy:
+      resources:
+        limits:
+          memory: 13G
     networks:
       - my-service-net
 

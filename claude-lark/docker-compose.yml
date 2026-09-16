@@ -7,10 +7,13 @@ x-claude-lark: &claude-lark
   tty: true
   stdin_open: true
   restart: unless-stopped
-#  deploy:
+  deploy:
 #    restart_policy:
 #      condition: on-failure
 #      max_attempts: 3
+    resources:
+      limits:
+        memory: 13G
   networks:
     - my-service-net
 
