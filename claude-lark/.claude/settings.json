@@ -1,13 +1,13 @@
 {
   "env": {
-    "ANTHROPIC_AUTH_TOKEN": "sk-yXt7bLBixuDc2ZsZHkGCG8N2oIJZAGeebKZkonHHzAQ3qd58",
-    "ANTHROPIC_BASE_URL": "http://new-api:3000",
-    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "deepseek-v4-flash",
-    "ANTHROPIC_DEFAULT_OPUS_MODEL": "deepseek-v4-flash",
-    "ANTHROPIC_DEFAULT_OPUS_MODEL_NAME": "deepseek-v4-flash",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL": "deepseek-v4-flash",
-    "ANTHROPIC_DEFAULT_SONNET_MODEL_NAME": "deepseek-v4-flash",
-    "ANTHROPIC_MODEL": "deepseek-v4-flash",
+    "ANTHROPIC_AUTH_TOKEN": "sk-028cca4fa81da457-kzn97g-b757e0eb",
+    "ANTHROPIC_BASE_URL": "http://9router:20128",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "Claude-Master-combo",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "Claude-Master-combo",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL_NAME": "Claude-Master-combo",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "Claude-Master-combo",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL_NAME": "Claude-Master-combo",
+    "ANTHROPIC_MODEL": "Claude-Master-combo",
     "CLAUDE_CODE_ATTRIBUTION_HEADER": "0"
   },
   "theme": "light-daltonized"
