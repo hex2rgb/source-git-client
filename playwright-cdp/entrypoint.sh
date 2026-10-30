@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-exec /ms-playwright/chromium-*/chrome-linux/chrome \
+exec /ms-playwright/chromium-*/chrome-linux64/chrome \
   --headless \
   --no-sandbox \
   --remote-debugging-address=0.0.0.0 \
