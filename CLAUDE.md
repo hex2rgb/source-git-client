@@ -43,5 +43,4 @@ docker compose -f n8n/docker-compose.yml logs -f
 - Timezone is `Asia/Shanghai` everywhere.
 - Data volumes mount Unraid host paths under `/mnt/user/appdata/` or `/mnt/alonepool/`.
 - `deploy.sh` scripts follow the same pattern: down → remove orphans → up. `smba-fs/deploy.sh` additionally supports selective service restart.
-- `restart: unless-stopped` with `on-failure` / `max_attempts: 3` is the standard restart policy.
 - No `.codegraph/` index exists — use grep/find for code navigation.

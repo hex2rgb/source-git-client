@@ -1,0 +1,24 @@
+services:
+  playwright-cdp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: playwright-cdp:local
+    container_name: playwright-cdp
+    init: true
+    ipc: host
+    ports:
+      - "9222:9222"
+    volumes:
+      - /data/volume/playwright-cdp:/data
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    networks:
+      - my-service-net
+
+networks:
+  my-service-net:
+    external: true
